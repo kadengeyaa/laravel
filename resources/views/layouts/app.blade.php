@@ -16,10 +16,14 @@
         <li><a href=""class="p-3">Post</a></li>
       </ul>
       <ul class="flex items-center">
-        <li><a href="" class="p-3">Kadenge Yaa</a></li>
-        <li><a href=""class="p-3">Login</a></li>
-        <li><a href="{{ route('register') }}"class="p-3">Register</a></li>
-        <li><a href=""class="p-3">Logout</a></li>
+        @auth
+          <li><a href="" class="p-3">Kadenge Yaa</a></li>
+          <li><a href=""class="p-3">Logout</a></li>  
+        @endauth       
+        @guest
+          <li><a href="{{ route('login') }}"class="p-3">Login</a></li>
+          <li><a href="{{ route('register') }}"class="p-3">Register</a></li>
+        @endguest
       </ul>
     </nav>
     @yield('content')
