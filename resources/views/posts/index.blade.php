@@ -31,14 +31,26 @@
 
                         <div class="flex items-center">
                             @auth
+                                @if ($post->ownedBy(auth()->user()))
+                                    <form action="{{ route('posts.destroy', $post) }}" method="post" class="mr-1">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-blue-500">Delete</button>
+                                    </form>
+                                @endif    
+                            @endauth
+                        </div>
+
+                        <div class="flex items-center">
+                            @auth
                                 @if ($post->likedBy(auth()->user()))
-                                    <form action="{{ route('posts.likes', $post->id) }}" method="post" class="mr-1">
+                                    <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-blue-500">Unlike</button>
                                     </form>
                                 @else
-                                    <form action="{{ route('posts.likes', $post->id) }}" method="post" class="mr-1">
+                                    <form action="{{ route('posts.likes', $post) }}" method="post" class="mr-1">
                                         @csrf
                                         <button type="submit" class="text-blue-500">Like</button>
                                     </form> 
