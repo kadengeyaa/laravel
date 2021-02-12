@@ -18,9 +18,20 @@
                 </div>
 
                 <div>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium">Post</button>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium mb-6">Post</button>
                 </div>
             </form>
+
+            @if ($posts->count())
+                @foreach ($posts as $post)
+                    <div class="mb-4">
+                        <a href="" class="font-bold">{{ $post->user->name }}</a> <span class="text-gray-600 text-sm">{{ $post->created_at->diffForHumans() }}</span>
+                        <p class="mb-2">{{ $post->body }}</p>
+                    </div>
+                @endforeach
+            @else
+                <p>There are no posts</p>
+            @endif
         </div>
     </div>
 @endsection
