@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     public function index()
     {
-        $posts = Post::paginate(20);
+        $posts = Post::paginate(5);
 
         return view('posts.index', [
             'posts' => $posts
